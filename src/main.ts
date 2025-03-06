@@ -10,6 +10,9 @@ import { AboutComponent } from './about/about.component';
 import { roleGuard } from './gaurds/role.gaurd';
 import { FeaturesComponent } from './features/features.component';
 import { notCompleteGuard } from './gaurds/not-complete.gaurd';
+import { moduleGuard } from './gaurds/module.gaurd';
+import { HeroResolver } from './gaurds/hero.resolver';
+import { provideHttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +38,9 @@ import { notCompleteGuard } from './gaurds/not-complete.gaurd';
         <li class="nav-item">
           <a class="nav-link" routerLink='/admin' routerLinkActive="active">Admin</a>
         </li>
+        <li class="nav-item">
+        <a class="nav-link" routerLink='/contact' routerLinkActive="active">Contact</a>
+      </li>
       </ul>
     </div>
   </div>
@@ -48,6 +54,7 @@ export class App {
 
 bootstrapApplication(App, {
   providers: [
+    provideHttpClient(),
     provideRouter([
       {
         path: '',
@@ -78,7 +85,15 @@ bootstrapApplication(App, {
       {
         path: 'features',
         component: FeaturesComponent,
+        resolve: {
+          hero: HeroResolver
+        },
         canDeactivate: [notCompleteGuard]
+      },
+      {
+        path: 'contact',
+        loadChildren: () => import('./contact/contact.module').then(m=>m.ContactModule),
+        canMatch: [moduleGuard]
       },
       {
         path: 'access-denied',

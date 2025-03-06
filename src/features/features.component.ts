@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-features',
@@ -8,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class FeaturesComponent {
 
+  constructor(private activatedRoute: ActivatedRoute) {}
+  ngOnInit() {
+    this.activatedRoute.data.subscribe(({ hero }) => {
+      console.log(hero);
+      
+    })
+  }
 }
