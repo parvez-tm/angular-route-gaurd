@@ -1,1 +1,24 @@
-<p>home works!</p>
+<strong>
+    Absolute Path (with /):
+</strong>
+<p>
+    When you use a / at the beginning of a path (e.g., /about), Angular treats it as an absolute path. This means the path is resolved from the root of the application. It doesn't matter what the current route is; it will always navigate to that exact path.
+</p>
+
+<strong>
+    Relative Path (without /):
+</strong>
+<p>
+    When you don’t use a / (e.g., edit), Angular treats the path as relative to the current route. This means the router will append that path to the current active route.
+</p>
+
+<strong>
+    Conclusion
+</strong>
+
+<p>
+    /about: This is an absolute path, so Angular will navigate to the root of the application and then to the about route.
+</p>
+<p>
+    edit: This is a relative path, so Angular will look at the current active route (e.g., /about) and append edit to it, making the final path /about/edit.
+</p>
